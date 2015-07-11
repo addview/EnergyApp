@@ -1,0 +1,55 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="Add new task">
+    <ion-nav-buttons side="right">
+        <button class="button icon button-clear" ng-click="add()">Save
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <button class="button button-full button-positive" ng-click="getCord()">
+            Get address from my position
+        </button>
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Latitude" ng-model="latitude">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Longitude" ng-model="longitude">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Address" ng-model="address">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="ZipCode" ng-model="zipcode">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="City" ng-model="city">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Date start</span>
+                <input type="date">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Date end</span>
+                <input type="date">
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Type of error
+                </div>
+                <select>
+                    <option>Error 1</option>
+                    <option selected>Error 2</option>
+                    <option>Error 3</option>
+                </select>
+            </label>
+            <label class="item item-input">
+                <textarea placeholder="Comments" ng-model="comment"></textarea>
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

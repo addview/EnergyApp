@@ -1,0 +1,8 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/www/sites/ang501/myApp/www/js/controllers.js",
+        "/www/sites/ang501/myApp/www/js/services.js",
+        "/www/sites/ang501/myApp/www/js/task/task.controller.js",
+        "/www/sites/ang501/myApp/www/js/tasks/task_services.js"
+    ]
+}
