@@ -1,21 +1,24 @@
-(function() {
-    'use strict';
+angular.module('starter.controllers')
 
-    angular
-        .module('starter.controllers')
-        .controller('TaskCtrl', TaskCtrl);
+.constant('FIREBASE_URI', 'https://torrid-inferno-3295.firebaseio.com/')
 
-    TaskCtrl.$inject = ['$scope', 'TaskService', '$state'];
+.controller('TaskCtrl', ['$scope', 'TaskService', '$state', 'ItemsService', function ($scope, TaskService, $state, ItemsService) {
 
-    function TaskCtrl($scope, TaskService, $state) {
-        $scope.tasks = TaskService.all();
-        $scope.remove = function(task) {
-            TaskService.remove(task);
-        };
-        $scope.add = function(task) {
+    $scope.newItem = {
+        address: '',
+        datestart: '',
+        dateend:'',
+        errortype:'',
+        comments:''
+    };
+    $scope.currentItem = null;
+    $scope.items = ItemsService.getItems();
 
-            $state.go('tab.task-add');
-        };
-    }
-
-})();
+    $scope.removeItem = function (id) {
+        ItemsService.removeItem(id);
+    };
+   
+    $scope.add = function (task) {
+        $state.go('tab.task-add');
+    };
+}]);

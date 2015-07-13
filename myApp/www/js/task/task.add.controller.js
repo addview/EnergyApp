@@ -1,13 +1,11 @@
-(function() {
-    'use strict';
+var app = angular.module('starter.controllers');
 
-    angular
-        .module('starter.controllers')
-        .controller('TaskAddCtrl', TaskAddCtrl);
+app.controller('TaskAddCtrl',['$scope', 'GoogleMapService', '$stateParams', '$log', 'cordService', '$ionicLoading', 'ItemsService', '$state',
+    function($scope, GoogleMapService, $stateParams, $log, cordService, $ionicLoading, ItemsService, $state){
 
-    TaskAddCtrl.$inject = ['$scope', 'GoogleMapService', '$stateParams', '$log', 'cordService', '$ionicLoading'];
 
-    function TaskAddCtrl($scope, GoogleMapService, $stateParams, $log, cordService, $ionicLoading) {
+    	$scope.newItem = { address: '', datestart: '', datestop:'', errortype:'', comment:'' };
+    	$scope.currentItem = null;
 
         $scope.getCord = function() {
             //$ionicLoading.show({template: 'Loading...'})
@@ -15,13 +13,14 @@
             cordService.cords().then(function(data) {
                 $log.info(data.data.results[0]);
                 var fixdata = data.data.results[0];
-                $scope.address = fixdata.formatted_address;
+                $scope.newItem.address = fixdata.formatted_address;
             });
 
-        }
+        } 
 
-        //$scope.map = GoogleMapService.getmap();
-        //$log.info($scope.map);
-
-    }
-})();
+        $scope.addItem = function () {
+	        ItemsService.addItem(angular.copy($scope.newItem));
+	        $state.go('tab.tasks');
+        //$scope.newItem = { name: '', description: '', count: 0 };
+    };
+}]);

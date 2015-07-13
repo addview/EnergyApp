@@ -6,7 +6,7 @@
 -->
 <ion-view view-title="Add new task">
     <ion-nav-buttons side="right">
-        <button class="button icon button-clear" ng-click="add()">Save
+        <button class="button icon button-clear" ng-click="addItem()">Save
         </button>
     </ion-nav-buttons>
     <ion-content class="padding">
@@ -15,27 +15,15 @@
         </button>
         <div class="list">
             <label class="item item-input">
-                <input type="text" placeholder="Latitude" ng-model="latitude">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="Longitude" ng-model="longitude">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="Address" ng-model="address">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="ZipCode" ng-model="zipcode">
-            </label>
-            <label class="item item-input">
-                <input type="text" placeholder="City" ng-model="city">
+                <input type="text" placeholder="Address" ng-model="newItem.address">
             </label>
             <label class="item item-input">
                 <span class="input-label">Date start</span>
-                <input type="date">
+                <input type="date" ng-model="newItem.datestart">
             </label>
             <label class="item item-input">
                 <span class="input-label">Date end</span>
-                <input type="date">
+                <input type="date" ng-model="newItem.datestop">
             </label>
             <label class="item item-input item-select">
                 <div class="input-label">
@@ -48,7 +36,7 @@
                 </select>
             </label>
             <label class="item item-input">
-                <textarea placeholder="Comments" ng-model="comment"></textarea>
+                <textarea placeholder="Comments" ng-model="newItem.comment"></textarea>
             </label>
         </div>
     </ion-content>
