@@ -14,6 +14,13 @@ angular.module('task.controllers', [])
     $scope.currentItem = null;
     $scope.items = ItemsService.getItems();
 
+    var aa = ItemsService.getFriends();
+
+
+    
+
+   
+
     //$scope.tasks = TaskService.all();
     $scope.remove = function(task) {
         TaskService.remove(task);

@@ -34,10 +34,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'auth.controllers', '
             templateUrl: 'templates/signin/sign-in.html',
             controller: 'SignInCtrl'
         })
+
         .state('forgotpassword', {
             url: '/forgot-password',
             templateUrl: 'templates/signin/forgot-password.html'
         })
+        
         .state('tabs', {
             url: '/tab',
             abstract: true,

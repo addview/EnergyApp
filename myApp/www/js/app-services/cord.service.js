@@ -26,7 +26,7 @@ angular.module('starter.services')
             //return results; 
         });
 
-        $log.info(deferred.promise);
+        
         return deferred.promise;
     }
 
