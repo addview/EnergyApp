@@ -1,9 +1,9 @@
 angular.module('starter.services', [])
 
 
-.factory('ItemsService', ['$firebase', 'FIREBASE_URI', '$q',  function($firebase, FIREBASE_URI, $q) {
+.factory('ItemsService', ['$firebaseArray', 'FIREBASE_URI', '$q',  function($firebaseArray, FIREBASE_URI, $q) {
     var ref = new Firebase(FIREBASE_URI);
-    var items = $firebase(ref);
+    var items = $firebaseArray(ref);
 
     var getItems = function() {
         return items;
@@ -21,13 +21,21 @@ angular.module('starter.services', [])
         items.$remove(id);
     };
 
+    var getAccount = function () {
+        
+        // var defered = $q.defer();
+
+        // var accountSigs = $firebaseArray(ref).then(function (response) {
+        //     console.log('show response: [' + response + ']');
+        //     defered.resolve(response);
+        // });
+
+        // return defered.promise;
+    };
+
     var getFriends = function() {
 
-        // this.sync = $firebaseArray(ref);
-        // this.sync.$loaded().then(function(data) {
-        //     var projects = data;
-        // });
-        // return this.sync;
+        
 
 
     };
@@ -37,6 +45,6 @@ angular.module('starter.services', [])
         addItem: addItem,
         updateItem: updateItem,
         removeItem: removeItem,
-        getFriends: getFriends
+        getAccount: getAccount
     }
 }]);

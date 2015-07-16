@@ -2,38 +2,47 @@ angular.module('task.controllers', [])
 
 .constant('FIREBASE_URI', 'https://torrid-inferno-3295.firebaseio.com/')
 
-.controller('TaskCtrl', ['$scope', '$state', 'ItemsService', function($scope, $state, ItemsService) {
-
-    $scope.newItem = {
-        address: '',
-        datestart: '',
-        dateend: '',
-        errortype: '',
-        comments: ''
-    };
-    $scope.currentItem = null;
-    $scope.items = ItemsService.getItems();
-
-    var aa = ItemsService.getFriends();
+.controller('TaskCtrl', ['$scope', '$state', 'ItemsService', '$firebaseArray', 'FIREBASE_URI', '$ionicLoading',
+    function($scope, $state, ItemsService, $firebaseArray, FIREBASE_URI, $ionicLoading) {
 
 
-    
+        var ref = new Firebase(FIREBASE_URI);
+        var tasklist = $firebaseArray(ref);
+        $scope.currentItem = null;
 
-   
+        //loading fungerar inte i emulatorn, slå på detta vid skarpt
+        //$cordovaSpinnerDialog.show("Get tasks", "loading...", true);
+        $ionicLoading.show({template: 'Loading...'})
 
-    //$scope.tasks = TaskService.all();
-    $scope.remove = function(task) {
-        TaskService.remove(task);
-    };
+        tasklist.$loaded()
+            .then(function(res) {
+                //loading fungerar inte i emulatorn, slå på detta vid skarpt
+                //$cordovaSpinnerDialog.hide();
+                $ionicLoading.hide();
+                $scope.items = res;
+            })
 
-    $scope.removeItem = function(id) {
-        ItemsService.removeItem(id);
-    };
 
-    $scope.add = function(task) {
-        $state.go('tab.task-add');
-    };
-}])
+        $scope.newItem = {
+            address: '',
+            datestart: '',
+            dateend: '',
+            errortype: '',
+            comments: ''
+        };
+
+        //$scope.items = ItemsService.getItems();
+
+
+        $scope.removeItem = function(id) {
+            ItemsService.removeItem(id);
+        };
+
+        $scope.add = function(task) {
+            $state.go('tab.task-add');
+        };
+    }
+])
 
 
 .controller('TaskAddCtrl', ['$scope', '$stateParams', '$log', 'cordService', '$ionicLoading', 'ItemsService', '$state',
@@ -49,10 +58,11 @@ angular.module('task.controllers', [])
         $scope.currentItem = null;
 
         $scope.getCord = function() {
-            //$ionicLoading.show({template: 'Loading...'})
+            $ionicLoading.show({template: 'Loading...'})
 
             cordService.cords().then(function(data) {
-                $log.info(data.data.results[0]);
+                $ionicLoading.hide();
+                // $log.info(data.data.results[0]);
                 var fixdata = data.data.results[0];
                 $scope.newItem.address = fixdata.formatted_address;
             });
